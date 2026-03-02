@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Duan – Gizlilik Politikası</title>
+    <title>Duan – Privacy Policy</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #FFFBEB; color: #1a1a1a; min-height: 100vh; display: flex; flex-direction: column; }
@@ -20,65 +20,233 @@
         .section h2 { margin-top: 0; }
         a { color: #92400E; }
         footer { text-align: center; padding: 30px; color: #A8A29E; font-size: 0.85rem; border-top: 1px solid #F5E6C8; }
+        .lang-switch { position: fixed; top: 16px; right: 16px; z-index: 10; }
+        .lang-switch select { font-size: 0.85rem; padding: 6px 10px; border-radius: 8px; border: 1px solid #D4A84B; background: #fff; color: #92400E; cursor: pointer; }
+        [dir="rtl"] { direction: rtl; text-align: right; }
+        [dir="rtl"] ul { margin: 8px 20px 12px 0; }
+        [dir="rtl"] .back { direction: rtl; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <a href="index.html" class="back">← Ana Sayfa</a>
-        <h1>Gizlilik Politikası</h1>
-        <p class="date">Son güncelleme: 23 Şubat 2025</p>
-
-        <div class="section">
-            <h2>Genel Bakış</h2>
-            <p>Duan ("Uygulama"), kullanıcılarının gizliliğine saygı duyar. Bu politika, hangi verilerin toplandığını, nasıl kullanıldığını ve nasıl korunduğunu açıklar.</p>
-        </div>
-
-        <div class="section">
-            <h2>Toplanan Veriler</h2>
-            <p>Uygulama aşağıdaki verileri toplar veya cihaz üzerinde işler:</p>
-            <ul>
-                <li><strong>Konum Bilgisi:</strong> Namaz vakitlerini hesaplamak ve kıble yönünü belirlemek için kullanılır. Konum verisi yalnızca cihazınızda işlenir.</li>
-                <li><strong>Hareket Sensörleri:</strong> Kıble pusulasının doğru çalışması için cihazın pusula ve ivmeölçer verileri kullanılır.</li>
-                <li><strong>Kullanım Verileri:</strong> Uygulamayı geliştirmek amacıyla anonim kullanım istatistikleri toplanabilir.</li>
-            </ul>
-        </div>
-
-        <div class="section">
-            <h2>Veri Paylaşımı</h2>
-            <p>Kişisel verileriniz üçüncü şahıslarla <strong>satılmaz</strong> veya paylaşılmaz. Uygulama aşağıdaki üçüncü taraf hizmetleri kullanır:</p>
-            <ul>
-                <li><strong>Firebase (Google):</strong> Uygulama analitiği ve veri senkronizasyonu</li>
-                <li><strong>RevenueCat:</strong> Abonelik yönetimi ve satın alma işlemleri</li>
-            </ul>
-            <p>Bu hizmetlerin kendi gizlilik politikaları geçerlidir.</p>
-        </div>
-
-        <div class="section">
-            <h2>Veri Güvenliği</h2>
-            <p>Verilerinizin güvenliğini sağlamak için endüstri standardı güvenlik önlemleri kullanılmaktadır. Ancak, internet üzerinden hiçbir iletim yöntemi %100 güvenli değildir.</p>
-        </div>
-
-        <div class="section">
-            <h2>Veri Saklama</h2>
-            <p>Tesbih sayıları, okuma ilerlemeniz ve uygulama tercihleri cihazınızda yerel olarak saklanır. Hesabınızı sildiğinizde ilgili tüm veriler kaldırılır.</p>
-        </div>
-
-        <div class="section">
-            <h2>Çocukların Gizliliği</h2>
-            <p>Uygulamamız 13 yaşın altındaki çocuklardan bilerek kişisel bilgi toplamaz. Ebeveyn veya vasiyseniz ve çocuğunuzun veri paylaştığını düşünüyorsanız, lütfen bizimle iletişime geçin.</p>
-        </div>
-
-        <div class="section">
-            <h2>Politika Değişiklikleri</h2>
-            <p>Bu gizlilik politikası zaman zaman güncellenebilir. Değişiklikler bu sayfada yayınlanacaktır. Uygulamayı kullanmaya devam etmeniz, güncel politikayı kabul ettiğiniz anlamına gelir.</p>
-        </div>
-
-        <div class="section">
-            <h2>İletişim</h2>
-            <p>Gizlilik politikamızla ilgili sorularınız için:</p>
-            <p><a href="mailto:mustafacebisli@gmail.com">mustafacebisli@gmail.com</a></p>
-        </div>
+    <div class="lang-switch">
+        <select id="langSelect" onchange="setLang(this.value)">
+            <option value="tr">Türkçe</option>
+            <option value="en">English</option>
+            <option value="ar">العربية</option>
+            <option value="bn">বাংলা</option>
+            <option value="es">Español</option>
+            <option value="fr">Français</option>
+            <option value="id">Indonesia</option>
+            <option value="ru">Русский</option>
+            <option value="sv">Svenska</option>
+            <option value="ur">اردو</option>
+            <option value="zh">中文</option>
+        </select>
     </div>
-    <footer>© 2025 Mustafa Cebisli. Tüm hakları saklıdır.</footer>
+    <div class="container" id="content"></div>
+    <footer id="footer"></footer>
+
+<script>
+var i18n = {
+  tr: {
+    dir: 'ltr', back: '← Ana Sayfa', title: 'Gizlilik Politikası', date: 'Son güncelleme: 2 Mart 2026',
+    sections: [
+      { h: 'Genel Bakış', p: 'Duan ("Uygulama"), kullanıcılarının gizliliğine saygı duyar. Bu politika, hangi verilerin toplandığını, nasıl kullanıldığını ve nasıl korunduğunu açıklar.' },
+      { h: 'Toplanan Veriler', p: 'Uygulama aşağıdaki verileri toplar veya cihaz üzerinde işler:', list: ['<strong>Konum Bilgisi:</strong> Namaz vakitlerini hesaplamak ve kıble yönünü belirlemek için kullanılır. Konum verisi yalnızca cihazınızda işlenir.','<strong>Hareket Sensörleri:</strong> Kıble pusulasının doğru çalışması için cihazın pusula ve ivmeölçer verileri kullanılır.','<strong>Kullanım Verileri:</strong> Uygulamayı geliştirmek amacıyla anonim kullanım istatistikleri toplanabilir.'] },
+      { h: 'Veri Paylaşımı', p: 'Kişisel verileriniz üçüncü şahıslarla <strong>satılmaz</strong> veya paylaşılmaz. Uygulama aşağıdaki üçüncü taraf hizmetleri kullanır:', list: ['<strong>Firebase (Google):</strong> Uygulama analitiği ve veri senkronizasyonu','<strong>RevenueCat:</strong> Abonelik yönetimi ve satın alma işlemleri'], p2: 'Bu hizmetlerin kendi gizlilik politikaları geçerlidir.' },
+      { h: 'Veri Güvenliği', p: 'Verilerinizin güvenliğini sağlamak için endüstri standardı güvenlik önlemleri kullanılmaktadır. Ancak, internet üzerinden hiçbir iletim yöntemi %100 güvenli değildir.' },
+      { h: 'Veri Saklama', p: 'Tesbih sayıları, okuma ilerlemeniz ve uygulama tercihleri cihazınızda yerel olarak saklanır. Hesabınızı sildiğinizde ilgili tüm veriler kaldırılır.' },
+      { h: 'Çocukların Gizliliği', p: 'Uygulamamız 13 yaşın altındaki çocuklardan bilerek kişisel bilgi toplamaz. Ebeveyn veya vasiyseniz ve çocuğunuzun veri paylaştığını düşünüyorsanız, lütfen bizimle iletişime geçin.' },
+      { h: 'Politika Değişiklikleri', p: 'Bu gizlilik politikası zaman zaman güncellenebilir. Değişiklikler bu sayfada yayınlanacaktır. Uygulamayı kullanmaya devam etmeniz, güncel politikayı kabul ettiğiniz anlamına gelir.' },
+      { h: 'İletişim', p: 'Gizlilik politikamızla ilgili sorularınız için:', email: true }
+    ],
+    footer: '© 2026 Mustafa Cebisli. Tüm hakları saklıdır.'
+  },
+  en: {
+    dir: 'ltr', back: '← Home', title: 'Privacy Policy', date: 'Last updated: March 2, 2026',
+    sections: [
+      { h: 'Overview', p: 'Duan ("App") respects the privacy of its users. This policy explains what data is collected, how it is used, and how it is protected.' },
+      { h: 'Data Collected', p: 'The App collects or processes the following data on the device:', list: ['<strong>Location Data:</strong> Used to calculate prayer times and determine qibla direction. Location data is processed only on your device.','<strong>Motion Sensors:</strong> Compass and accelerometer data are used for accurate qibla compass functionality.','<strong>Usage Data:</strong> Anonymous usage statistics may be collected to improve the App.'] },
+      { h: 'Data Sharing', p: 'Your personal data is <strong>not sold</strong> or shared with third parties. The App uses the following third-party services:', list: ['<strong>Firebase (Google):</strong> App analytics and data synchronization','<strong>RevenueCat:</strong> Subscription management and purchase processing'], p2: 'These services have their own privacy policies.' },
+      { h: 'Data Security', p: 'Industry-standard security measures are used to protect your data. However, no method of transmission over the internet is 100% secure.' },
+      { h: 'Data Storage', p: 'Tasbih counts, reading progress, and app preferences are stored locally on your device. All related data is removed when you delete your account.' },
+      { h: "Children's Privacy", p: 'Our App does not knowingly collect personal information from children under 13. If you are a parent or guardian and believe your child has shared data, please contact us.' },
+      { h: 'Policy Changes', p: 'This privacy policy may be updated from time to time. Changes will be published on this page. Continued use of the App constitutes acceptance of the current policy.' },
+      { h: 'Contact', p: 'For questions about our privacy policy:', email: true }
+    ],
+    footer: '© 2026 Mustafa Cebisli. All rights reserved.'
+  },
+  ar: {
+    dir: 'rtl', back: '→ الصفحة الرئيسية', title: 'سياسة الخصوصية', date: 'آخر تحديث: 2 مارس 2026',
+    sections: [
+      { h: 'نظرة عامة', p: 'يحترم تطبيق Duan ("التطبيق") خصوصية مستخدميه. توضح هذه السياسة البيانات التي يتم جمعها وكيفية استخدامها وكيفية حمايتها.' },
+      { h: 'البيانات المجمعة', p: 'يجمع التطبيق البيانات التالية أو يعالجها على الجهاز:', list: ['<strong>بيانات الموقع:</strong> تُستخدم لحساب مواقيت الصلاة وتحديد اتجاه القبلة. تُعالج بيانات الموقع فقط على جهازك.','<strong>مستشعرات الحركة:</strong> تُستخدم بيانات البوصلة ومقياس التسارع لعمل بوصلة القبلة بدقة.','<strong>بيانات الاستخدام:</strong> قد يتم جمع إحصائيات استخدام مجهولة لتحسين التطبيق.'] },
+      { h: 'مشاركة البيانات', p: 'لا يتم <strong>بيع</strong> بياناتك الشخصية أو مشاركتها مع أطراف ثالثة. يستخدم التطبيق خدمات الطرف الثالث التالية:', list: ['<strong>Firebase (Google):</strong> تحليلات التطبيق ومزامنة البيانات','<strong>RevenueCat:</strong> إدارة الاشتراكات ومعالجة المشتريات'], p2: 'لهذه الخدمات سياسات خصوصية خاصة بها.' },
+      { h: 'أمان البيانات', p: 'تُستخدم تدابير أمنية معيارية لحماية بياناتك. ومع ذلك، لا توجد طريقة نقل عبر الإنترنت آمنة بنسبة 100%.' },
+      { h: 'تخزين البيانات', p: 'يتم تخزين عدادات التسبيح وتقدم القراءة وتفضيلات التطبيق محلياً على جهازك. تُزال جميع البيانات ذات الصلة عند حذف حسابك.' },
+      { h: 'خصوصية الأطفال', p: 'لا يجمع تطبيقنا عمداً معلومات شخصية من أطفال دون 13 عاماً. إذا كنت والداً أو وصياً وتعتقد أن طفلك قد شارك بيانات، يرجى الاتصال بنا.' },
+      { h: 'تغييرات السياسة', p: 'قد يتم تحديث سياسة الخصوصية هذه من وقت لآخر. سيتم نشر التغييرات على هذه الصفحة. يعني الاستمرار في استخدام التطبيق قبولك للسياسة الحالية.' },
+      { h: 'الاتصال', p: 'لأسئلتكم حول سياسة الخصوصية:', email: true }
+    ],
+    footer: '© 2026 Mustafa Cebisli. جميع الحقوق محفوظة.'
+  },
+  es: {
+    dir: 'ltr', back: '← Inicio', title: 'Política de Privacidad', date: 'Última actualización: 2 de marzo de 2026',
+    sections: [
+      { h: 'Descripción general', p: 'Duan ("Aplicación") respeta la privacidad de sus usuarios. Esta política explica qué datos se recopilan, cómo se utilizan y cómo se protegen.' },
+      { h: 'Datos recopilados', p: 'La Aplicación recopila o procesa los siguientes datos en el dispositivo:', list: ['<strong>Datos de ubicación:</strong> Se utilizan para calcular los horarios de oración y determinar la dirección de la qibla. Los datos de ubicación solo se procesan en su dispositivo.','<strong>Sensores de movimiento:</strong> Se utilizan los datos de la brújula y el acelerómetro para el funcionamiento preciso de la brújula de la qibla.','<strong>Datos de uso:</strong> Se pueden recopilar estadísticas de uso anónimas para mejorar la Aplicación.'] },
+      { h: 'Compartir datos', p: 'Sus datos personales <strong>no se venden</strong> ni se comparten con terceros. La Aplicación utiliza los siguientes servicios de terceros:', list: ['<strong>Firebase (Google):</strong> Analítica de la aplicación y sincronización de datos','<strong>RevenueCat:</strong> Gestión de suscripciones y procesamiento de compras'], p2: 'Estos servicios tienen sus propias políticas de privacidad.' },
+      { h: 'Seguridad de datos', p: 'Se utilizan medidas de seguridad estándar de la industria para proteger sus datos. Sin embargo, ningún método de transmisión por Internet es 100% seguro.' },
+      { h: 'Almacenamiento de datos', p: 'Los conteos de tasbih, el progreso de lectura y las preferencias de la aplicación se almacenan localmente en su dispositivo. Todos los datos relacionados se eliminan cuando borra su cuenta.' },
+      { h: 'Privacidad infantil', p: 'Nuestra Aplicación no recopila intencionalmente información personal de menores de 13 años. Si es padre o tutor y cree que su hijo ha compartido datos, contáctenos.' },
+      { h: 'Cambios en la política', p: 'Esta política de privacidad puede actualizarse periódicamente. Los cambios se publicarán en esta página. El uso continuado de la Aplicación constituye la aceptación de la política vigente.' },
+      { h: 'Contacto', p: 'Para preguntas sobre nuestra política de privacidad:', email: true }
+    ],
+    footer: '© 2026 Mustafa Cebisli. Todos los derechos reservados.'
+  },
+  fr: {
+    dir: 'ltr', back: '← Accueil', title: 'Politique de Confidentialité', date: 'Dernière mise à jour : 2 mars 2026',
+    sections: [
+      { h: 'Aperçu', p: "Duan (\"Application\") respecte la vie privée de ses utilisateurs. Cette politique explique quelles données sont collectées, comment elles sont utilisées et comment elles sont protégées." },
+      { h: 'Données collectées', p: "L'Application collecte ou traite les données suivantes sur l'appareil :", list: ["<strong>Données de localisation :</strong> Utilisées pour calculer les horaires de prière et déterminer la direction de la qibla. Les données de localisation sont traitées uniquement sur votre appareil.","<strong>Capteurs de mouvement :</strong> Les données de la boussole et de l'accéléromètre sont utilisées pour le fonctionnement précis de la boussole qibla.","<strong>Données d'utilisation :</strong> Des statistiques d'utilisation anonymes peuvent être collectées pour améliorer l'Application."] },
+      { h: 'Partage des données', p: "Vos données personnelles ne sont <strong>ni vendues</strong> ni partagées avec des tiers. L'Application utilise les services tiers suivants :", list: ["<strong>Firebase (Google) :</strong> Analytique de l'application et synchronisation des données","<strong>RevenueCat :</strong> Gestion des abonnements et traitement des achats"], p2: 'Ces services ont leurs propres politiques de confidentialité.' },
+      { h: 'Sécurité des données', p: "Des mesures de sécurité standard sont utilisées pour protéger vos données. Cependant, aucune méthode de transmission sur Internet n'est sécurisée à 100%." },
+      { h: 'Stockage des données', p: "Les compteurs de tasbih, la progression de lecture et les préférences de l'application sont stockés localement sur votre appareil. Toutes les données associées sont supprimées lorsque vous supprimez votre compte." },
+      { h: 'Confidentialité des enfants', p: "Notre Application ne collecte pas sciemment d'informations personnelles auprès d'enfants de moins de 13 ans. Si vous êtes parent ou tuteur et pensez que votre enfant a partagé des données, veuillez nous contacter." },
+      { h: 'Modifications de la politique', p: "Cette politique de confidentialité peut être mise à jour périodiquement. Les modifications seront publiées sur cette page. L'utilisation continue de l'Application constitue l'acceptation de la politique en vigueur." },
+      { h: 'Contact', p: 'Pour toute question concernant notre politique de confidentialité :', email: true }
+    ],
+    footer: '© 2026 Mustafa Cebisli. Tous droits réservés.'
+  },
+  ru: {
+    dir: 'ltr', back: '← Главная', title: 'Политика конфиденциальности', date: 'Последнее обновление: 2 марта 2026',
+    sections: [
+      { h: 'Обзор', p: 'Duan («Приложение») уважает конфиденциальность своих пользователей. Эта политика объясняет, какие данные собираются, как они используются и как защищаются.' },
+      { h: 'Собираемые данные', p: 'Приложение собирает или обрабатывает следующие данные на устройстве:', list: ['<strong>Данные о местоположении:</strong> Используются для расчёта времени намаза и определения направления киблы. Данные о местоположении обрабатываются только на вашем устройстве.','<strong>Датчики движения:</strong> Данные компаса и акселерометра используются для точной работы компаса киблы.','<strong>Данные об использовании:</strong> Анонимная статистика использования может собираться для улучшения Приложения.'] },
+      { h: 'Обмен данными', p: 'Ваши персональные данные <strong>не продаются</strong> и не передаются третьим лицам. Приложение использует следующие сторонние сервисы:', list: ['<strong>Firebase (Google):</strong> Аналитика приложения и синхронизация данных','<strong>RevenueCat:</strong> Управление подписками и обработка покупок'], p2: 'Эти сервисы имеют собственные политики конфиденциальности.' },
+      { h: 'Безопасность данных', p: 'Для защиты ваших данных используются стандартные отраслевые меры безопасности. Однако ни один метод передачи через интернет не является на 100% безопасным.' },
+      { h: 'Хранение данных', p: 'Счётчики тасбиха, прогресс чтения и настройки приложения хранятся локально на вашем устройстве. Все связанные данные удаляются при удалении вашей учётной записи.' },
+      { h: 'Конфиденциальность детей', p: 'Наше Приложение не собирает сознательно персональную информацию от детей младше 13 лет. Если вы родитель или опекун и считаете, что ваш ребёнок поделился данными, свяжитесь с нами.' },
+      { h: 'Изменения политики', p: 'Эта политика конфиденциальности может периодически обновляться. Изменения будут опубликованы на этой странице. Продолжение использования Приложения означает принятие действующей политики.' },
+      { h: 'Контакт', p: 'По вопросам о политике конфиденциальности:', email: true }
+    ],
+    footer: '© 2026 Mustafa Cebisli. Все права защищены.'
+  },
+  id: {
+    dir: 'ltr', back: '← Beranda', title: 'Kebijakan Privasi', date: 'Terakhir diperbarui: 2 Maret 2026',
+    sections: [
+      { h: 'Ikhtisar', p: 'Duan ("Aplikasi") menghormati privasi penggunanya. Kebijakan ini menjelaskan data apa yang dikumpulkan, bagaimana digunakan, dan bagaimana dilindungi.' },
+      { h: 'Data yang Dikumpulkan', p: 'Aplikasi mengumpulkan atau memproses data berikut di perangkat:', list: ['<strong>Data Lokasi:</strong> Digunakan untuk menghitung waktu shalat dan menentukan arah kiblat. Data lokasi hanya diproses di perangkat Anda.','<strong>Sensor Gerak:</strong> Data kompas dan akselerometer digunakan untuk fungsi kompas kiblat yang akurat.','<strong>Data Penggunaan:</strong> Statistik penggunaan anonim dapat dikumpulkan untuk meningkatkan Aplikasi.'] },
+      { h: 'Berbagi Data', p: 'Data pribadi Anda <strong>tidak dijual</strong> atau dibagikan dengan pihak ketiga. Aplikasi menggunakan layanan pihak ketiga berikut:', list: ['<strong>Firebase (Google):</strong> Analitik aplikasi dan sinkronisasi data','<strong>RevenueCat:</strong> Manajemen langganan dan pemrosesan pembelian'], p2: 'Layanan ini memiliki kebijakan privasi mereka sendiri.' },
+      { h: 'Keamanan Data', p: 'Langkah-langkah keamanan standar industri digunakan untuk melindungi data Anda. Namun, tidak ada metode transmisi melalui internet yang 100% aman.' },
+      { h: 'Penyimpanan Data', p: 'Hitungan tasbih, kemajuan membaca, dan preferensi aplikasi disimpan secara lokal di perangkat Anda. Semua data terkait dihapus saat Anda menghapus akun.' },
+      { h: 'Privasi Anak-anak', p: 'Aplikasi kami tidak secara sengaja mengumpulkan informasi pribadi dari anak-anak di bawah 13 tahun. Jika Anda orang tua atau wali dan yakin anak Anda telah berbagi data, silakan hubungi kami.' },
+      { h: 'Perubahan Kebijakan', p: 'Kebijakan privasi ini dapat diperbarui dari waktu ke waktu. Perubahan akan dipublikasikan di halaman ini. Penggunaan Aplikasi secara berkelanjutan merupakan penerimaan kebijakan yang berlaku.' },
+      { h: 'Kontak', p: 'Untuk pertanyaan tentang kebijakan privasi kami:', email: true }
+    ],
+    footer: '© 2026 Mustafa Cebisli. Semua hak dilindungi.'
+  },
+  sv: {
+    dir: 'ltr', back: '← Hem', title: 'Integritetspolicy', date: 'Senast uppdaterad: 2 mars 2026',
+    sections: [
+      { h: 'Översikt', p: 'Duan ("Appen") respekterar sina användares integritet. Denna policy förklarar vilka data som samlas in, hur de används och hur de skyddas.' },
+      { h: 'Insamlad data', p: 'Appen samlar in eller behandlar följande data på enheten:', list: ['<strong>Platsdata:</strong> Används för att beräkna bönetider och bestämma qibla-riktning. Platsdata behandlas endast på din enhet.','<strong>Rörelsesensorer:</strong> Kompass- och accelerometerdata används för korrekt qibla-kompassfunktion.','<strong>Användningsdata:</strong> Anonym användningsstatistik kan samlas in för att förbättra Appen.'] },
+      { h: 'Datadelning', p: 'Dina personuppgifter <strong>säljs inte</strong> eller delas med tredje part. Appen använder följande tredjepartstjänster:', list: ['<strong>Firebase (Google):</strong> Appanalys och datasynkronisering','<strong>RevenueCat:</strong> Prenumerationshantering och köpbearbetning'], p2: 'Dessa tjänster har sina egna integritetspolicyer.' },
+      { h: 'Datasäkerhet', p: 'Branschstandardiserade säkerhetsåtgärder används för att skydda dina data. Ingen överföringsmetod via internet är dock 100% säker.' },
+      { h: 'Datalagring', p: 'Tasbih-räknare, läsframsteg och appinställningar lagras lokalt på din enhet. All relaterad data tas bort när du raderar ditt konto.' },
+      { h: 'Barns integritet', p: 'Vår App samlar inte medvetet in personlig information från barn under 13 år. Om du är förälder eller vårdnadshavare och tror att ditt barn har delat data, kontakta oss.' },
+      { h: 'Policyändringar', p: 'Denna integritetspolicy kan uppdateras från tid till annan. Ändringar publiceras på denna sida. Fortsatt användning av Appen utgör godkännande av gällande policy.' },
+      { h: 'Kontakt', p: 'För frågor om vår integritetspolicy:', email: true }
+    ],
+    footer: '© 2026 Mustafa Cebisli. Alla rättigheter förbehållna.'
+  },
+  bn: {
+    dir: 'ltr', back: '← হোম', title: 'গোপনীয়তা নীতি', date: 'সর্বশেষ আপডেট: ২ মার্চ ২০২৬',
+    sections: [
+      { h: 'সংক্ষিপ্ত বিবরণ', p: 'Duan ("অ্যাপ") তার ব্যবহারকারীদের গোপনীয়তাকে সম্মান করে। এই নীতি ব্যাখ্যা করে কী ডেটা সংগ্রহ করা হয়, কীভাবে ব্যবহার করা হয় এবং কীভাবে সুরক্ষিত করা হয়।' },
+      { h: 'সংগৃহীত ডেটা', p: 'অ্যাপটি ডিভাইসে নিম্নলিখিত ডেটা সংগ্রহ বা প্রক্রিয়া করে:', list: ['<strong>লোকেশন ডেটা:</strong> নামাজের সময় গণনা এবং কিবলা দিক নির্ধারণে ব্যবহৃত হয়। লোকেশন ডেটা শুধুমাত্র আপনার ডিভাইসে প্রক্রিয়া করা হয়।','<strong>মোশন সেন্সর:</strong> সঠিক কিবলা কম্পাস কার্যকারিতার জন্য কম্পাস এবং অ্যাক্সেলেরোমিটার ডেটা ব্যবহার করা হয়।','<strong>ব্যবহারের ডেটা:</strong> অ্যাপ উন্নত করতে বেনামী ব্যবহারের পরিসংখ্যান সংগ্রহ করা হতে পারে।'] },
+      { h: 'ডেটা শেয়ারিং', p: 'আপনার ব্যক্তিগত ডেটা তৃতীয় পক্ষের কাছে <strong>বিক্রি বা শেয়ার করা হয় না</strong>। অ্যাপটি নিম্নলিখিত তৃতীয় পক্ষের পরিষেবা ব্যবহার করে:', list: ['<strong>Firebase (Google):</strong> অ্যাপ অ্যানালিটিক্স এবং ডেটা সিঙ্ক্রোনাইজেশন','<strong>RevenueCat:</strong> সাবস্ক্রিপশন ম্যানেজমেন্ট এবং ক্রয় প্রক্রিয়াকরণ'], p2: 'এই পরিষেবাগুলির নিজস্ব গোপনীয়তা নীতি রয়েছে।' },
+      { h: 'ডেটা নিরাপত্তা', p: 'আপনার ডেটা সুরক্ষিত করতে শিল্প-মানের নিরাপত্তা ব্যবস্থা ব্যবহার করা হয়। তবে, ইন্টারনেটে কোনো ট্রান্সমিশন পদ্ধতি ১০০% নিরাপদ নয়।' },
+      { h: 'ডেটা সংরক্ষণ', p: 'তাসবিহ কাউন্ট, পড়ার অগ্রগতি এবং অ্যাপ পছন্দ আপনার ডিভাইসে স্থানীয়ভাবে সংরক্ষিত হয়। আপনার অ্যাকাউন্ট মুছে ফেলার সময় সমস্ত সম্পর্কিত ডেটা সরানো হয়।' },
+      { h: 'শিশুদের গোপনীয়তা', p: 'আমাদের অ্যাপ ১৩ বছরের কম বয়সী শিশুদের কাছ থেকে জেনেশুনে ব্যক্তিগত তথ্য সংগ্রহ করে না। আপনি যদি অভিভাবক হন এবং মনে করেন আপনার সন্তান ডেটা শেয়ার করেছে, অনুগ্রহ করে আমাদের সাথে যোগাযোগ করুন।' },
+      { h: 'নীতি পরিবর্তন', p: 'এই গোপনীয়তা নীতি সময়ে সময়ে আপডেট হতে পারে। পরিবর্তনগুলি এই পৃষ্ঠায় প্রকাশিত হবে। অ্যাপের ক্রমাগত ব্যবহার বর্তমান নীতির গ্রহণ গঠন করে।' },
+      { h: 'যোগাযোগ', p: 'আমাদের গোপনীয়তা নীতি সম্পর্কে প্রশ্নের জন্য:', email: true }
+    ],
+    footer: '© ২০২৬ Mustafa Cebisli। সর্বস্বত্ব সংরক্ষিত।'
+  },
+  ur: {
+    dir: 'rtl', back: '→ ہوم', title: 'رازداری کی پالیسی', date: 'آخری تازہ کاری: 2 مارچ 2026',
+    sections: [
+      { h: 'جائزہ', p: 'Duan ("ایپ") اپنے صارفین کی رازداری کا احترام کرتی ہے۔ یہ پالیسی بتاتی ہے کہ کون سا ڈیٹا جمع کیا جاتا ہے، کیسے استعمال ہوتا ہے اور کیسے محفوظ رکھا جاتا ہے۔' },
+      { h: 'جمع کردہ ڈیٹا', p: 'ایپ ڈیوائس پر درج ذیل ڈیٹا جمع یا پروسیس کرتی ہے:', list: ['<strong>لوکیشن ڈیٹا:</strong> نماز کے اوقات کا حساب اور قبلہ کی سمت معلوم کرنے کے لیے استعمال ہوتا ہے۔ لوکیشن ڈیٹا صرف آپ کے ڈیوائس پر پروسیس ہوتا ہے۔','<strong>موشن سینسرز:</strong> قبلہ کمپاس کے درست کام کے لیے کمپاس اور ایکسلرومیٹر ڈیٹا استعمال ہوتا ہے۔','<strong>استعمال کا ڈیٹا:</strong> ایپ کو بہتر بنانے کے لیے گمنام استعمال کے اعداد و شمار جمع کیے جا سکتے ہیں۔'] },
+      { h: 'ڈیٹا کی شراکت', p: 'آپ کا ذاتی ڈیٹا تیسرے فریق کو <strong>فروخت یا شیئر نہیں</strong> کیا جاتا۔ ایپ درج ذیل تھرڈ پارٹی سروسز استعمال کرتی ہے:', list: ['<strong>Firebase (Google):</strong> ایپ تجزیات اور ڈیٹا سنکرونائزیشن','<strong>RevenueCat:</strong> سبسکرپشن مینجمنٹ اور خریداری کی پروسیسنگ'], p2: 'ان سروسز کی اپنی رازداری پالیسیاں ہیں۔' },
+      { h: 'ڈیٹا سیکیورٹی', p: 'آپ کے ڈیٹا کی حفاظت کے لیے صنعتی معیار کے حفاظتی اقدامات استعمال کیے جاتے ہیں۔ تاہم، انٹرنیٹ پر ترسیل کا کوئی طریقہ 100% محفوظ نہیں ہے۔' },
+      { h: 'ڈیٹا اسٹوریج', p: 'تسبیح کاؤنٹ، پڑھنے کی پیشرفت اور ایپ ترجیحات آپ کے ڈیوائس پر مقامی طور پر محفوظ ہیں۔ اکاؤنٹ حذف کرنے پر تمام متعلقہ ڈیٹا ہٹا دیا جاتا ہے۔' },
+      { h: 'بچوں کی رازداری', p: 'ہماری ایپ جان بوجھ کر 13 سال سے کم عمر بچوں سے ذاتی معلومات جمع نہیں کرتی۔ اگر آپ والدین یا سرپرست ہیں اور سمجھتے ہیں کہ آپ کے بچے نے ڈیٹا شیئر کیا ہے تو براہ کرم ہم سے رابطہ کریں۔' },
+      { h: 'پالیسی میں تبدیلیاں', p: 'یہ رازداری پالیسی وقتاً فوقتاً اپ ڈیٹ ہو سکتی ہے۔ تبدیلیاں اس صفحے پر شائع کی جائیں گی۔ ایپ کا مسلسل استعمال موجودہ پالیسی کی قبولیت ہے۔' },
+      { h: 'رابطہ', p: 'ہماری رازداری پالیسی کے بارے میں سوالات کے لیے:', email: true }
+    ],
+    footer: '© 2026 Mustafa Cebisli۔ تمام حقوق محفوظ ہیں۔'
+  },
+  zh: {
+    dir: 'ltr', back: '← 首页', title: '隐私政策', date: '最后更新：2026年3月2日',
+    sections: [
+      { h: '概述', p: 'Duan（"应用"）尊重用户的隐私。本政策说明收集哪些数据、如何使用以及如何保护。' },
+      { h: '收集的数据', p: '应用在设备上收集或处理以下数据：', list: ['<strong>位置数据：</strong>用于计算祈祷时间和确定朝拜方向。位置数据仅在您的设备上处理。','<strong>运动传感器：</strong>罗盘和加速度计数据用于朝拜方向罗盘的精确功能。','<strong>使用数据：</strong>可能收集匿名使用统计数据以改进应用。'] },
+      { h: '数据共享', p: '您的个人数据<strong>不会被出售</strong>或与第三方共享。应用使用以下第三方服务：', list: ['<strong>Firebase (Google)：</strong>应用分析和数据同步','<strong>RevenueCat：</strong>订阅管理和购买处理'], p2: '这些服务有各自的隐私政策。' },
+      { h: '数据安全', p: '使用行业标准安全措施来保护您的数据。但是，通过互联网传输的任何方法都不是100%安全的。' },
+      { h: '数据存储', p: '念珠计数、阅读进度和应用偏好存储在您的设备本地。删除账户时，所有相关数据将被删除。' },
+      { h: '儿童隐私', p: '我们的应用不会故意收集13岁以下儿童的个人信息。如果您是家长或监护人，认为您的孩子分享了数据，请联系我们。' },
+      { h: '政策变更', p: '本隐私政策可能会不时更新。变更将在此页面上发布。继续使用应用即表示接受当前政策。' },
+      { h: '联系方式', p: '如对我们的隐私政策有疑问：', email: true }
+    ],
+    footer: '© 2026 Mustafa Cebisli。保留所有权利。'
+  }
+};
+
+function detectLang() {
+  var nav = (navigator.language || navigator.userLanguage || 'en').toLowerCase().split('-')[0];
+  return i18n[nav] ? nav : 'en';
+}
+
+function render(lang) {
+  var t = i18n[lang];
+  document.documentElement.lang = lang;
+  document.documentElement.dir = t.dir;
+  document.getElementById('langSelect').value = lang;
+  document.title = 'Duan – ' + t.title;
+
+  var html = '<a href="index.html" class="back">' + t.back + '</a>';
+  html += '<h1>' + t.title + '</h1>';
+  html += '<p class="date">' + t.date + '</p>';
+
+  for (var i = 0; i < t.sections.length; i++) {
+    var s = t.sections[i];
+    html += '<div class="section"><h2>' + s.h + '</h2><p>' + s.p + '</p>';
+    if (s.list) {
+      html += '<ul>';
+      for (var j = 0; j < s.list.length; j++) html += '<li>' + s.list[j] + '</li>';
+      html += '</ul>';
+    }
+    if (s.p2) html += '<p>' + s.p2 + '</p>';
+    if (s.p3) html += '<p>' + s.p3 + '</p>';
+    if (s.email) html += '<p><a href="mailto:mustafacebisli@gmail.com">mustafacebisli@gmail.com</a></p>';
+    html += '</div>';
+  }
+  document.getElementById('content').innerHTML = html;
+  document.getElementById('footer').textContent = t.footer;
+}
+
+function setLang(lang) {
+  render(lang);
+  try { localStorage.setItem('duan_lang', lang); } catch(e) {}
+}
+
+(function() {
+  var saved;
+  try { saved = localStorage.getItem('duan_lang'); } catch(e) {}
+  render(saved && i18n[saved] ? saved : detectLang());
+})();
+</script>
 </body>
 </html>
